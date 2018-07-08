@@ -155,7 +155,7 @@ echo "<td align ='center'><a href='".$_SERVER['PHP_SELF']."?month=".$monthnum."&
 	if(isset($_GET['v'])) {
 		echo "<a href='".$_SERVER['PHP_SELF']."?month=".$month."&day=".$day."&year=".$year."&v=true&f=true'>Add Appointment</a>";
 		if(isset($_GET['f'])) {
-			include("eventform.php");
+			include("addform.php");
 		}
 	}
 	?>
