@@ -1,3 +1,7 @@
+<?php
+//session_start();
+//$user = $_POST['uname'];
+?>
 <!DOCTYPE html>
 <?php 
 $servername = "localhost";
@@ -96,7 +100,24 @@ $monthname = date("F", $currenttimestamp);
 $numdays = date("t", $currenttimestamp);
 $weekcount = 0;
 ?>
+<?php
+if(isset($_POST['add'])) {
+  $title = $_POST['title'];
+  $desc = $_POST['description'];
+  $stime= $_POST['stime'];
+  $etime=$_POST['etime'];
+  $appdate = $year."-".$month."-".$day;
+  $user = $_POST['uname'];
+  $sql3 = "INSERT INTO $user (appdate, title, description, stime, etime)
+  VALUES ('$appdate', '$title', '$desc', '$stime', '$etime')";
+  if ($con5->query($sql3) === TRUE) {
+    echo "successfully";
+} else {
+    echo "Error creating table: " . $con5->error;
+}
 
+}
+?>
 	<table>
 		<tr>
 		<td><input type="button" class="btn" value="<" name="previousbutton" onclick="prevmonth(<?php echo $month.",".$year?>)"></td>

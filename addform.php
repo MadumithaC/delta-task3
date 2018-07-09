@@ -53,11 +53,22 @@ input[type=submit]:hover {
 </style>
 </head>
 <body>
+ <?php 
+$servername = "localhost";
+$username = "root";
+$psw = "";
+$dbname = "appointments";
+$con5 = new mysqli($servername, $username, $psw, $dbname);
+if ($con5->connect_error) { 
+    die("Connection failed: " . $con->connect_error);
+} 
 
+
+?>
 <h3>Add your Appointments here!</h3>
 
 <div class="container">
-  <form name="eventform" action="<?php $_SERVER['PHP_SELF']; ?>?month=<?php echo $month;?>&day=<?php echo $day; ?>&year=<?php echo $year; ?>&v=true&add=true">
+  <form name="eventform" method = "POST" action="<?php $_SERVER['PHP_SELF']; ?>?month=<?php echo $month;?>&day=<?php echo $day; ?>&year=<?php echo $year; ?>&v=true&add=true">
     <label for="title">Title</label>
     <input type="text" id="title" name="title" placeholder="Your event name..">
     <label for="description">Description</label>
@@ -71,10 +82,11 @@ input[type=submit]:hover {
     
 
    
-
-    <input type="submit" id="button" value="Add">
+    <input type="submit" name="add" id="button" value="Add">
   </form>
 </div>
+
+ 
 
 </body>
 </html>
