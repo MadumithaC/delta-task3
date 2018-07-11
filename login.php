@@ -156,11 +156,8 @@ if ($con->query($sql) === TRUE) {
 		alert("You have been signed up successfully");
 	</script>
 	<?php
-//session_start();
-//$_SESSION['uname'] = $user;
-
-//On page 2
-//$user = $_SESSION['uname'];
+session_start();
+$_SESSION['uname'] = $user;
 
 
 	$user = $_POST["uname"];

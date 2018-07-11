@@ -1,6 +1,6 @@
 <?php
-//session_start();
-//$user = $_POST['uname'];
+session_start();
+$user = $_POST['uname'];
 ?>
 <!DOCTYPE html>
 <?php 
