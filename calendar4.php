@@ -1,6 +1,6 @@
 <?php
 session_start();
-$user = $_POST['uname'];
+//$user = $_SESSION['uname'];
 ?>
 <!DOCTYPE html>
 <?php 
@@ -75,6 +75,7 @@ tr, td {
 	</script>
 	</head>
 <body>
+  <a href="login.php" style="float:right;font-size: 25px">LOGOUT</a>
 <?php
 if(isset($_GET['day'])) {
 	$day = $_GET['day'];
@@ -107,14 +108,12 @@ if(isset($_POST['add'])) {
   $stime= $_POST['stime'];
   $etime=$_POST['etime'];
   $appdate = $year."-".$month."-".$day;
-  $user = $_POST['uname'];
+  //$user = $_POST['uname'];
+  $user = $_SESSION['uname'];
   $sql3 = "INSERT INTO $user (appdate, title, description, stime, etime)
   VALUES ('$appdate', '$title', '$desc', '$stime', '$etime')";
   if ($con5->query($sql3) === TRUE) {
-    echo "successfully";
-} else {
-    echo "Error creating table: " . $con5->error;
-}
+    }
 
 }
 ?>
@@ -163,7 +162,21 @@ $dlen = strlen($daynum);
            	$daynum= "0".$daynum;
            }
 
-echo "<td align ='center'><a href='".$_SERVER['PHP_SELF']."?month=".$monthnum."&day=".$daynum."&year=".$year."&v=true'>".$i."</a></td>";
+echo "<td align ='center'><a href='".$_SERVER['PHP_SELF']."?month=".$monthnum."&day=".$daynum."&year=".$year."&v=true'>".$i."</a>";
+$user= $_SESSION['uname'];
+$sql4 = "SELECT * from $user WHERE appdate LIKE '$year-$monthnum-$daynum'";
+$res = mysqli_query($con5, $sql4);
+while($val = mysqli_fetch_row($res)) {
+  echo "Title: ".$val[1]."<br>";
+  echo "Description: ".$val[2]."<br>";
+  echo "Start time: ".$val[3]. "<br>";
+  echo "End time: ".$val[4]."<br>"; 
+}
+if ($con5->query($sql4) === TRUE) {
+   
+} 
+
+ echo "</td>";
 }
 
      echo "</tr>";
@@ -174,7 +187,7 @@ echo "<td align ='center'><a href='".$_SERVER['PHP_SELF']."?month=".$monthnum."&
 	</table>
 	<?php
 	if(isset($_GET['v'])) {
-		echo "<a href='".$_SERVER['PHP_SELF']."?month=".$month."&day=".$day."&year=".$year."&v=true&f=true'>Add Appointment</a>";
+		echo "<a style='font-size:30px' href='".$_SERVER['PHP_SELF']."?month=".$month."&day=".$day."&year=".$year."&v=true&f=true'>Add Appointment</a>";
 		if(isset($_GET['f'])) {
 			include("addform.php");
 		}

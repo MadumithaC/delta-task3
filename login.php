@@ -1,5 +1,5 @@
 <?php
-//session_start();
+session_start();
 //$_SESSION['$user'] = $_POST['uname'];
 ?>
 <!DOCTYPE html>
@@ -156,11 +156,12 @@ if ($con->query($sql) === TRUE) {
 		alert("You have been signed up successfully");
 	</script>
 	<?php
-session_start();
+
+$user = $_POST["uname"];
 $_SESSION['uname'] = $user;
 
 
-	$user = $_POST["uname"];
+	//$user = $_POST["uname"];
 	$sql2 = "CREATE TABLE $user (
 	appdate DATE,
     title VARCHAR(255),
